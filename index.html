@@ -331,7 +331,7 @@
 
         <div id="panelInfo" class="dynamic-panel">
             <h3>Información Extendida del Linaje Deportivo</h3>
-            <p>Toyota no solo ha conquistado las calles con el Supra, sino que ha mantenido viva la pasión del automovilismo con la línea GR (Gazoo Racing). Modelos como el GR Celica, el MR2 y el moderno GR Yaris demuestran que la ingeniería japonesa está diseñada para el rendimiento extremo y la durabilidad en pista.</p>
+            <p>Toyota no solo ha conquistado las calles con el Supra, sino que ha mantenido viva la pasión del automovilismo con la línea GR (Gazoo Racing). Modelos como el GR Celica, el MR2 and el moderno GR Yaris demuestran que la ingeniería japonesa está diseñada para el rendimiento extremo y la durabilidad en pista.</p>
         </div>
 
         <div id="panelTablas" class="dynamic-panel">
@@ -388,7 +388,15 @@
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
+
+        const SUPABASE_URL = "https://rxvvpkdhadnznclahovd.supabase.co"; 
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4dnZwa2RoYWRuem5jbGFob3ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNDg4NjAsImV4cCI6MjA5NzkyNDg2MH0.XonH6zGHpuA2uzuXxfrn27XmA0v8i84g3O-EdvndJ5k";
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         const autosDeportivos = [
             {
                 modelo: "Toyota Supra MK4",
@@ -480,19 +488,36 @@
             panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
         }
 
-        function enviarDatos(event) {
-            event.preventDefault();
+        async function enviarDatos(event) {
+            event.preventDefault(); 
 
-            const usuario = document.getElementById('username').value;
-            const idContacto = document.getElementById('userId').value;
-            const calificacion = document.getElementById('rating').value;
-            const modeloFavorito = document.getElementById('favModel').value;
+            const usuarioVal = document.getElementById('username').value;
+            const idContactoVal = document.getElementById('userId').value;
+            const calificacionVal = document.getElementById('rating').value;
+            const modeloFavoritoVal = document.getElementById('favModel').value;
 
-            const datosAEnviar = { usuario, idContacto, calificacion, modeloFavorito };
-            console.log("Datos enviados exitosamente a la Base de Datos:", datosAEnviar);
+            try {
+              
+                const { data, error } = await supabaseClient
+                    .from('registros')
+                    .insert([
+                        { 
+                            usuario: usuarioVal, 
+                            idContacto: idContactoVal, 
+                            calificacion: calificacionVal, 
+                            modeloFavorito: modeloFavoritoVal 
+                        }
+                    ]);
 
-            alert(`¡Datos enviados correctamente a la base de datos!\nGracias por registrarte, ${usuario}.`);
-            document.getElementById('toyotaForm').reset();
+                if (error) throw error;
+
+                alert(`¡Datos registrados con éxito en Supabase!\nGracias por registrarte, ${usuarioVal}.`);
+                document.getElementById('toyotaForm').reset(); 
+
+            } catch (error) {
+                console.error("Error detallado al guardar:", error);
+                alert("Hubo un problema al guardar en la base de datos: " + error.message);
+            }
         }
     </script>
 </body>
