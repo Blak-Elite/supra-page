@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
-
+    
     <style>
         :root {
             --bg-color: #f4f7f6;
@@ -283,11 +283,12 @@
     </style>
 </head>
 <body>
-
+     <center>
     <header>
         <h1>Hablando de los mejores autos deportivos</h1>
         <button class="config-btn" onclick="toggleTheme()" title="Configuración de Modo">⚙️</button>
     </header>
+    </center>
 
     <div class="container">
         
@@ -303,8 +304,8 @@
             </div>
         </section>
 
-        <section>
-            <h2 class="section-title">Modelos principales</h2>
+        <center><section>
+            <h2 class="section-title">Modelos principales</h2></center>
             <table id="tablaPrincipal">
                 <thead>
                     <tr>
@@ -328,6 +329,21 @@
             <button class="inter-btn" onclick="togglePanel('panelInfo')">Más información</button>
             <button class="inter-btn" onclick="togglePanel('panelTablas')">Ver más modelos en tablas</button>
         </div>
+
+
+
+<center>
+<table style="width:200px; background-color:lightblue; border-collapse:collapse;">
+  <tr>
+    <th style="border:1px solid black; padding:5px;">Mi Base De Datos:</th>
+    <td style="border:1px solid black; padding:5px;">
+      <a href="https://supabase.com/dashboard/project/rxvvpkdhadnznclahovd/editor/17585?schema=public&method=github" target="_blank">
+        Ver Base De Datos:
+      </a>
+    </td>
+  </tr>
+</table>
+</center>
 
         <div id="panelInfo" class="dynamic-panel">
             <h3>Información Extendida del Linaje Deportivo</h3>
@@ -356,8 +372,8 @@
             </table>
         </div>
 
-        <section class="form-section">
-            <h2 class="section-title">Registro de Entusiastas</h2>
+        <center><section class="form-section">
+            <h2 class="section-title">Registro de Entusiastas</h2></center>
             <form id="toyotaForm" onsubmit="enviarDatos(event)">
                 <div class="form-group">
                     <label for="username">Nombre de Usuario:</label>
